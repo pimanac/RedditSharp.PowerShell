@@ -4,8 +4,6 @@ $module = gci "RedditSharp.dll"
 
 $module.FullName
 
-
-
 $dir = "./RedditSharp"
 $files = gci @("RedditSharp.PowerShell.dll",
                "RedditSharp.dll",
@@ -13,7 +11,8 @@ $files = gci @("RedditSharp.PowerShell.dll",
                "HtmlAgilityPack.dll",
                "log4net.dll",
                "RedditSharp.psd1",
-               "RedditSharp.PowerShell.dll-Help.xml"
+               "RedditSharp.PowerShell.dll-Help.xml",
+               "RedditSharp.PowerShell.format.ps1xml"
           )
 
 Remove-Item -Path $dir -Recurse -Force
