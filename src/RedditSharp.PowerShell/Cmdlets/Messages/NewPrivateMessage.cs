@@ -11,7 +11,10 @@ namespace RedditSharp.PowerShell.Cmdlets
     [OutputType(typeof(bool))]
     public class NewPrivateMessage : PSCmdlet
     {
-        [Parameter(ParameterSetName = "ByTarget",Position = 0, HelpMessage = "Reddit User to which to send the message.")]
+        [Parameter(ParameterSetName = "ByTarget",
+            Position = 0,
+            ValueFromPipeline = true,
+            HelpMessage = "Reddit User to which to send the message.")]
         public RedditUser Target { get; set; }
 
         [Parameter(ParameterSetName = "ByUserName", Position = 0, HelpMessage = "Reddit username to which to send the message.")]
