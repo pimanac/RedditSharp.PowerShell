@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedditSharp.PowerShell", "s
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5F432033-F8C5-4465-B081-4A90795D66AE}"
 	ProjectSection(SolutionItems) = preProject
-		Readme.md = Readme.md
+		License.md = License.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{A21D5504-BE25-4197-9972-043E35C9A99A}"
