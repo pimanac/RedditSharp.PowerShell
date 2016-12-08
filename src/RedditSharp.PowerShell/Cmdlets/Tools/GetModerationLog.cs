@@ -108,7 +108,7 @@ namespace RedditSharp.PowerShell.Cmdlets
                 try
                 {
                     // get the listing
-                    WriteObject(DoWork());
+                    WriteObject(DoWork(),true);
                 }
                 catch (Exception ex)
                 {
