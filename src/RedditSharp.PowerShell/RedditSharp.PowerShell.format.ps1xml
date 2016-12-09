@@ -9,43 +9,74 @@
     <ViewDefinitions>
         <!-- Things -->
         
-        <!-- Subreddit -->
+        <!-- Comments -->
+        
+        <!-- Users -->
         <View>
-            <Name>SubredditDefault</Name>
+            <Name>UserDefault</Name>
             <ViewSelectedBy>
-                <TypeName>RedditSharp.Things.Subreddit</TypeName>
+                <TypeName>RedditSharp.Things.RedditUser</TypeName>
             </ViewSelectedBy>
             <TableControl>
                 <TableRowEntries>
                     <TableRowEntry>
                         <TableColumnItems>
                             <TableColumnItem>
-                                <PropertyName>FullName</PropertyName>
-                            </TableColumnItem>
-                            <TableColumnItem>
-                                <PropertyName>NSFW</PropertyName>
+                                <PropertyName>Name</PropertyName>
                             </TableColumnItem>
                             <TableColumnItem>
                                 <PropertyName>Created</PropertyName>
                             </TableColumnItem>
                             <TableColumnItem>
-                                <PropertyName>Name</PropertyName>
+                                <PropertyName>LinkKarma</PropertyName>
                             </TableColumnItem>
                             <TableColumnItem>
-                                <PropertyName>Subscribers</PropertyName>
+                                <PropertyName>CommentKarma</PropertyName>
                             </TableColumnItem>
                             <TableColumnItem>
-                                <PropertyName>ActiveUsers</PropertyName>
+                                <PropertyName>IsModerator</PropertyName>
                             </TableColumnItem>
                             <TableColumnItem>
-                                <PropertyName>PublicDescription</PropertyName>
+                                <PropertyName>HasGold</PropertyName>
                             </TableColumnItem>
                         </TableColumnItems>
                     </TableRowEntry>
                 </TableRowEntries>
             </TableControl>
         </View>
-        
+        <View>
+            <Name>RedditUserDefaultList</Name>
+            <ViewSelectedBy>
+                <TypeName>RedditSharp.Things.RedditUser</TypeName>
+            </ViewSelectedBy>
+            <ListControl>
+                <ListEntries>
+                    <ListEntry>
+                        <ListItems>
+                            <ListItem>
+                                <PropertyName>Name</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>Created</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>LinkKarma</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>CommentKarma</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>IsModerator</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>HasGold</PropertyName>
+                            </ListItem>
+                        </ListItems>
+                    </ListEntry>
+                </ListEntries>
+            </ListControl>
+        </View>
+
         <!-- Post -->
         <View>
             <Name>PostDefault</Name>
@@ -124,5 +155,286 @@
                 </TableRowEntries>
             </TableControl>
         </View>
+        <View>
+            <Name>PostDefaultList</Name>
+            <ViewSelectedBy>
+                <TypeName>RedditSharp.Things.Post</TypeName>
+            </ViewSelectedBy>
+            <ListControl>
+                <ListEntries>
+                    <ListEntry>
+                        <ListItems>
+                            <ListItem>
+                                <PropertyName>FullName</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>SubredditName</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>CreatedUTC</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>AuthorName</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>Score</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>CommentCount</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>Domain</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>ShortLink</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>Domain</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>Title</PropertyName>
+                            </ListItem>
+                        </ListItems>
+                    </ListEntry>
+                </ListEntries>
+            </ListControl>
+        </View>
+        
+        <!-- Private Message -->
+        <View>
+            <Name>PrivateMessageDefault</Name>
+            <ViewSelectedBy>
+                <TypeName>RedditSharp.Things.PrivateMessage</TypeName>
+            </ViewSelectedBy>
+            <TableControl>
+                <TableRowEntries>
+                    <TableRowEntry>
+                        <TableColumnItems>
+                            <TableColumnItem>
+                                <PropertyName>SentUTC</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>Author</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>Subreddit</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>Destination</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>Subject</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>Body</PropertyName>
+                            </TableColumnItem>
+                        </TableColumnItems>
+                    </TableRowEntry>
+                </TableRowEntries>
+            </TableControl>
+        </View>
+        <View>
+            <Name>PrivateMessageDefault</Name>
+            <ViewSelectedBy>
+                <TypeName>RedditSharp.Things.PrivateMessage</TypeName>
+            </ViewSelectedBy>
+            <ListControl>
+                <ListEntries>
+                    <ListEntry>
+                        <ListItems>
+                            <ListItem>
+                                <PropertyName>SentUTC</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>Author</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>Subreddit</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>Destination</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>Subject</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>Body</PropertyName>
+                            </ListItem>
+                        </ListItems>
+                    </ListEntry>
+                </ListEntries>
+            </ListControl>
+        </View>
+        
+        <!-- Subreddit -->
+        <View>
+            <Name>SubredditDefault</Name>
+            <ViewSelectedBy>
+                <TypeName>RedditSharp.Things.Subreddit</TypeName>
+            </ViewSelectedBy>
+            <TableControl>
+                <TableRowEntries>
+                    <TableRowEntry>
+                        <TableColumnItems>
+                            <TableColumnItem>
+                                <PropertyName>FullName</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>NSFW</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>Created</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>Name</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>Subscribers</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>ActiveUsers</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>PublicDescription</PropertyName>
+                            </TableColumnItem>
+                        </TableColumnItems>
+                    </TableRowEntry>
+                </TableRowEntries>
+            </TableControl>
+        </View>
+        <View>
+            <Name>SubredditDefaultList</Name>
+            <ViewSelectedBy>
+                <TypeName>RedditSharp.Things.Subreddit</TypeName>
+            </ViewSelectedBy>
+            <ListControl>
+                <ListEntries>
+                    <ListEntry>
+                        <ListItems>
+                            <ListItem>
+                                <PropertyName>FullName</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>NSFW</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>Created</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>Name</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>Subscribers</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>ActiveUsers</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>PublicDescription</PropertyName>
+                            </ListItem>
+                        </ListItems>
+                    </ListEntry>
+                </ListEntries>
+            </ListControl>
+        </View>
+        
+
+        <!-- Mod actions -->
+        <View>
+            <Name>ModactionDefault</Name>
+            <ViewSelectedBy>
+                <TypeName>RedditSharp.Things.ModAction</TypeName>
+            </ViewSelectedBy>
+            
+            <TableControl>
+                <TableHeaders>
+                    <TableColumnHeader>
+                        <Label>TimeStamp</Label>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>FullName</Label>
+                        <Width>9</Width>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>Action</Label>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>Moderator</Label>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>Author</Label>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>Details</Label>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>Link</Label>
+                    </TableColumnHeader>
+                </TableHeaders>
+                <TableRowEntries>
+                    <TableRowEntry>
+                        <TableColumnItems>
+                            <TableColumnItem>
+                                <PropertyName>TimeStamp</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>TargetThingFullname</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>Action</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>ModeratorName</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>TargetAuthorName</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>Details</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>TargetThingPermalink</PropertyName>
+                            </TableColumnItem>
+                        </TableColumnItems>
+                    </TableRowEntry>
+                </TableRowEntries>
+            </TableControl>
+        </View>
+        <View>
+            <Name>ModactionDefaultList</Name>
+            <ViewSelectedBy>
+                <TypeName>RedditSharp.Things.ModAction</TypeName>
+            </ViewSelectedBy>
+            <ListControl>
+                <ListEntries>
+                    <ListEntry>
+                        <ListItems>
+                            <ListItem>
+                                <PropertyName>TimeStamp</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>TargetThingFullname</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>Action</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>ModeratorName</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>TargetAuthorName</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>Details</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>TargetThingPermalink</PropertyName>
+                            </ListItem>
+                        </ListItems>
+                    </ListEntry>
+                </ListEntries>
+            </ListControl>
+        </View>
+        
     </ViewDefinitions>
 </Configuration>
