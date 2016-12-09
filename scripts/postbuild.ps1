@@ -1,10 +1,7 @@
-﻿Write-Host "Running Build script"
-
-$module = gci "RedditSharp.dll"
-
-$module.FullName
+﻿Write-Host "Running postbuild script"
 
 $dir = "./RedditSharp"
+$helpDir = "./RedditSharp/en-US"
 $files = gci @("RedditSharp.PowerShell.dll",
                "RedditSharp.dll",
                "Newtonsoft.Json.dll",
@@ -17,15 +14,22 @@ $files = gci @("RedditSharp.PowerShell.dll",
 
 Remove-Item -Path $dir -Recurse -Force
 
-if ( !(Test-Path $dir)) {
-    New-Item -ItemType Directory -Path $dir | Out-Null
-}
-
-Write-Host "Copying..."
+New-Item -ItemType Directory -Path $dir | Out-Null
+New-Item -ItemType Directory -Path $helpDir | Out-Null
 
 $files | % {
    Write-Host $_.Name
-   Copy-Item -Path $_.FullName -Destination $dir | Out-Null
+   if ($_.Name.EndsWith(".dll-Help.xml")) {
+      Copy-Item -Path $_.FullName -Destination $helpDir | Out-Null
+   }
+   else {
+      Copy-Item -Path $_.FullName -Destination $dir | Out-Null
+   }
+}
+
+if ($PSVersionTable.PSVersion.Major -ge 5) {
+   Remove-Item "./RedditSharp.PowerShell.zip" -Force
+   Compress-Archive -Path "./RedditSharp" -DestinationPath "./RedditSharp.PowerShell.zip"
 }
 
 Write-Host "Done!"
