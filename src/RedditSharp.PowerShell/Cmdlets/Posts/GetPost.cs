@@ -161,10 +161,10 @@ namespace RedditSharp.PowerShell.Cmdlets
                     switch (SortBy.ToLower())
                     {
                         case "hot":
-                            WriteObject(InputObject.Hot.GetListing(Limit, 100));
+                            WriteObject(InputObject.Hot.GetListing(Limit, 100),true);
                             break;
                         case "new":
-                            WriteObject(InputObject.New.GetListing(Limit, 100));
+                            WriteObject(InputObject.New.GetListing(Limit, 100),true);
                             break;
                         case "controversial":
                             // todo: add this later
@@ -173,7 +173,7 @@ namespace RedditSharp.PowerShell.Cmdlets
                             // todo: add this later
                             break;
                         case "rising":
-                            WriteObject(InputObject.Rising.GetListing(Limit, 100));
+                            WriteObject(InputObject.Rising.GetListing(Limit, 100),true);
                             break;
                         default:
                             break;
