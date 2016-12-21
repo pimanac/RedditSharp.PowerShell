@@ -17,7 +17,7 @@ namespace RedditSharp.PowerShell.Cmdlets.Posts
     public class EditPost : Cmdlet
     {
         [Parameter(Mandatory=true,Position = 0,HelpMessage = "Self post to edit")]
-        public Post Target { get; set; }
+        public Post InputObject { get; set; }
 
         [Parameter(Mandatory = true,Position = 1,HelpMessage = "New body text/markdown.")]
         public string Body { get; set; }
@@ -33,13 +33,13 @@ namespace RedditSharp.PowerShell.Cmdlets.Posts
         {
             try
             {
-                Target.EditText(Body);
-                Target.SelfText = Body;
-                WriteObject(Target);
+                InputObject.EditText(Body);
+                InputObject.SelfText = Body;
+                WriteObject(InputObject);
             }
             catch (Exception ex)
             {
-                WriteError(new ErrorRecord(ex, "CantUpdateSelfText", ErrorCategory.InvalidOperation, Target));
+                WriteError(new ErrorRecord(ex, "CantUpdateSelfText", ErrorCategory.InvalidOperation, InputObject));
             }
         }
     }
