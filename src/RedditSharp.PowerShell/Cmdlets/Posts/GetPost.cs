@@ -28,9 +28,9 @@ namespace RedditSharp.PowerShell.Cmdlets
         /// <summary>
         /// <para type="description">Fully qualified url to the reddit post</para>
         /// </summary>
-        [Parameter(ParameterSetName = "ByUri",Mandatory=false,HelpMessage = "Url to the reddit post.")]
+        [Parameter(ParameterSetName = "ByUrl",Mandatory=false,HelpMessage = "Url to the reddit post.")]
         [ValidateNotNullOrEmpty]
-        public string Uri { get; set; }
+        public string Url { get; set; }
 
         /// <summary>
         /// <para type="description">Subreddit name</para>
@@ -99,8 +99,8 @@ namespace RedditSharp.PowerShell.Cmdlets
                 case "ByInputObject":
                     ByInputObject();
                     break;
-                case "ByUri":
-                    ByUri();
+                case "ByUrl":
+                    ByUrl();
                     break;
                 case "ByName":
                     ByName();
@@ -110,7 +110,7 @@ namespace RedditSharp.PowerShell.Cmdlets
             }
         }
 
-        private void ByUri()
+        private void ByUrl()
         {
             if (AsJob)
             {
@@ -118,9 +118,9 @@ namespace RedditSharp.PowerShell.Cmdlets
                 {
                     Subreddit = null,
                     Limit = Limit,
-                    Name = "Get-Post  -Uri" + Uri,
+                    Name = "Get-Post  -Uri" + Url,
                     Sort = null,
-                    Url = Uri
+                    Url = Url
                 };
                 JobRepository.Add(job);
                 WriteObject(job);
@@ -130,11 +130,11 @@ namespace RedditSharp.PowerShell.Cmdlets
             {
                 try
                 {
-                    WriteObject(Session.Reddit.GetPost(new Uri(Uri)));
+                    WriteObject(Session.Reddit.GetPost(new Uri(Url)));
                 }
                 catch (Exception ex)
                 {
-                    WriteError(new ErrorRecord(ex, "CantGetPost", ErrorCategory.InvalidOperation, Uri));
+                    WriteError(new ErrorRecord(ex, "CantGetPost", ErrorCategory.InvalidOperation, Url));
                 }
             }
         }
@@ -181,7 +181,7 @@ namespace RedditSharp.PowerShell.Cmdlets
                 }
                 catch (Exception ex)
                 {
-                    WriteError(new ErrorRecord(ex, "CantGetPost", ErrorCategory.InvalidOperation, Uri));
+                    WriteError(new ErrorRecord(ex, "CantGetPost", ErrorCategory.InvalidOperation, Url));
                 }
             }
         }

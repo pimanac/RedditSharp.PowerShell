@@ -5,10 +5,19 @@ using RedditSharp.Things;
 
 namespace RedditSharp.PowerShell.Cmdlets
 {
+    /// <summary>
+    /// <para type="description">Return a subreddit by name.</para>
+    /// <example>
+    ///    <code>Get-Subreddit "example"</code>
+    /// </example>
+    /// </summary>
     [Cmdlet(VerbsCommon.Get,"Subreddit")]
     [OutputType(typeof(Subreddit))]
     public class GetSubreddit : Cmdlet
     {
+        /// <summary>
+        /// <para type="description">Subreddit name.</para>
+        /// </summary>
         [Parameter(Mandatory=true,Position = 0,HelpMessage = "Subreddit name")]
         public string Name { get; set; }
 

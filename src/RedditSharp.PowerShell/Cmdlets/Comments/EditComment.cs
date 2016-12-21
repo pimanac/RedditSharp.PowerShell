@@ -4,15 +4,24 @@ using RedditSharp.Things;
 
 namespace RedditSharp.PowerShell.Cmdlets.Comments
 {
+    /// <summary>
+    /// <para type="description">Edit an existing comment.</para>
+    /// </summary>
     [Cmdlet(VerbsData.Edit,"Comment")]
     [OutputType(typeof(Comment))]
     public class EditComment : Cmdlet
     {
+        /// <summary>
+        /// <para type="description">Comment to edit.</para>
+        /// </summary>
         [Parameter(ParameterSetName = "ByInputObject", Mandatory = true, Position = 0, ValueFromPipeline = true,
              HelpMessage = "Comment to edit")]
         [ValidateNotNullOrEmpty]
         public Comment InputObject { get; set; }
 
+        /// <summary>
+        /// <para type="description">New comment body.  Supports markdown.</para>
+        /// </summary>
         [Parameter(Mandatory = true, HelpMessage = "Comment text/markdown")]
         [ValidateNotNullOrEmpty]
         public string Body { get; set; }

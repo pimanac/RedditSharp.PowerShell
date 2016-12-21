@@ -11,23 +11,39 @@ using RedditSharp.Things;
 
 namespace RedditSharp.PowerShell.Cmdlets.Comments
 {
+    /// <summary>
+    /// <para type="synopsis">Create a new comment.</para>
+    /// <para type="description">Create a new comment.</para>
+    /// </summary>
     [Cmdlet(VerbsCommon.New, "Comment")]
     [OutputType(typeof(Comment))]
     public class NewComment : PSCmdlet
     {
+        /// <summary>
+        /// <para type="description">Post or Comment to reply to.</para>
+        /// </summary>
         [Parameter(ParameterSetName = "ByInputObject",Mandatory = true, Position = 0, ValueFromPipeline = true,
              HelpMessage = "Post or Comment to reply to.")]
         [ValidateNotNullOrEmpty]
         public VotableThing InputObject { get; set; }
 
+        /// <summary>
+        /// <para type="description">Replying to a comment or post.  This is probably going to go away</para>
+        /// </summary>
         [Parameter(ParameterSetName = "ByType",Mandatory = true,Position = 0,HelpMessage = "Replying to a Comment or a Post")]
         [ValidateSet(new []{"Comment","Post"})]
         public string TargetType { get; set; }
 
+        /// <summary>
+        /// <para type="description">Base35 id of the target.</para>
+        /// </summary>
         [Parameter(ParameterSetName = "ByType", Mandatory = true, Position = 1,HelpMessage = "Base36 id of the Target")]
         [ValidateNotNullOrEmpty]
         public string Id { get; set; }
 
+        /// <summary>
+        /// <para type="description">Comment body.  Supports markdown.</para>
+        /// </summary>
         [Parameter(Mandatory = true, HelpMessage = "Comment text/markdown")]
         [ValidateNotNullOrEmpty]
         public string Body { get; set; }

@@ -5,6 +5,12 @@ using System.Management.Automation;
 
 namespace RedditSharp.PowerShell.Cmdlets.Reddit
 {
+    /// <summary>
+    /// <para type="description">Get the current reddit session.</para>
+    /// <example>
+    ///    <code>Get-RedditSession</code>
+    /// </example>
+    /// </summary>
     [Cmdlet(VerbsCommon.Get,"RedditSession")]
     [OutputType(typeof(RedditSharp.Reddit))]
     public class GetRedditSession : Cmdlet

@@ -12,6 +12,15 @@ using RedditSharp.Things;
 
 namespace RedditSharp.PowerShell.Cmdlets
 {
+    /// <summary>
+    /// <para type="description">Perform a mod action on an item.</para>
+    /// <example>
+    ///    <code>$comment | Invoke-ModeratorAction -Action Flair -Text "good content" -CssClass "my-css-class" </code>
+    /// </example>
+    /// <example>
+    ///    <code>Get-Subreddit "example" |  Get-Post -Sort Hot -Limit 10 | % { $_ | Invoke-Moderator-Action Approve }</code>
+    /// </example>
+    /// </summary>
     [Cmdlet(VerbsLifecycle.Invoke, "ModeratorAction")]
     public class InvokeModeratorAction : PSCmdlet, IDynamicParameters
     {
@@ -20,12 +29,18 @@ namespace RedditSharp.PowerShell.Cmdlets
         private UnbanDynamicParameter unbanContext;
         private FlairDynamicParameter flairContext;
 
+        /// <summary>
+        /// Action to perform on the item.
+        /// </summary>
         [Parameter(Mandatory = true, Position = 0, HelpMessage = "Action to perform")]
         [ValidateSet(new[] { "Approve", "Remove", "Ban", "Unban", "Flair", "Unflair", "Distinguish" }, IgnoreCase = true)]
         public string Action { get; set; }
 
+        /// <summary>
+        /// Item to action.  Must be a Comment, Post or User.
+        /// </summary>
         [Parameter(Mandatory = false, Position = 1, ValueFromPipeline = true, HelpMessage = "Target RedditSharp.Thing")]
-        public Thing Target { get; set; }
+        public Thing InputObject { get; set; }
 
         protected override void BeginProcessing()
         {
@@ -107,31 +122,31 @@ namespace RedditSharp.PowerShell.Cmdlets
             }
         }
 
-        private void Flair(string text,string cssClass)
+        private void Flair(string text, string cssClass)
         {
-            if (Target.Kind != "t3")
+            if (InputObject.Kind != "t3")
             {
                 Session.Log.Warn("Cannot flair this this");
                 WriteError(new ErrorRecord(
                             new InvalidOperationException("Cannot flair this Thing."),
                         "CannotFlair",
                         ErrorCategory.InvalidOperation,
-                        Target)
+                        InputObject)
                 );
             }
             else
             {
                 try
                 {
-                    var p = Target as Post;
+                    var p = InputObject as Post;
                     p.SetFlair(text, cssClass);
                     Session.Log.Debug($"Set flair on {p.FullName} to {text}  /  {cssClass}");
-                    WriteObject(Target);
+                    WriteObject(InputObject);
                 }
                 catch (Exception ex)
                 {
                     Session.Log.Error("Could not set flair");
-                    WriteError(new ErrorRecord(ex, "CannotFlair", ErrorCategory.InvalidOperation, Target));
+                    WriteError(new ErrorRecord(ex, "CannotFlair", ErrorCategory.InvalidOperation, InputObject));
                 }
             }
         }
@@ -142,7 +157,7 @@ namespace RedditSharp.PowerShell.Cmdlets
             {
                 Comment c;
                 Post p;
-                c = Target as Comment;
+                c = InputObject as Comment;
 
                 if (c != null)
                 {
@@ -150,16 +165,16 @@ namespace RedditSharp.PowerShell.Cmdlets
                 }
                 else
                 {
-                    p = Target as Post;
+                    p = InputObject as Post;
                     p.Remove();
                 }
-                Session.Log.Debug($"Removed {Target.FullName}");
-                WriteObject(Target);
+                Session.Log.Debug($"Removed {InputObject.FullName}");
+                WriteObject(InputObject);
             }
             catch (Exception ex)
             {
-                Session.Log.Error($"Could not remove {Target.FullName}",ex);
-                WriteError(new ErrorRecord(ex, "This item cannot be removed.", ErrorCategory.InvalidOperation, Target));
+                Session.Log.Error($"Could not remove {InputObject.FullName}", ex);
+                WriteError(new ErrorRecord(ex, "This item cannot be removed.", ErrorCategory.InvalidOperation, InputObject));
             }
         }
 
@@ -169,7 +184,7 @@ namespace RedditSharp.PowerShell.Cmdlets
             {
                 Comment c;
                 Post p;
-                c = Target as Comment;
+                c = InputObject as Comment;
 
                 if (c != null)
                 {
@@ -177,16 +192,16 @@ namespace RedditSharp.PowerShell.Cmdlets
                 }
                 else
                 {
-                    p = Target as Post;
+                    p = InputObject as Post;
                     p.Approve();
                 }
-                Session.Log.Debug($"Approved {Target.FullName}");
-                WriteObject(Target);
+                Session.Log.Debug($"Approved {InputObject.FullName}");
+                WriteObject(InputObject);
             }
             catch (Exception ex)
             {
-                Session.Log.Error($"Could not approve {Target.FullName}",ex);
-                WriteError(new ErrorRecord(ex, "This item cannot be approved.", ErrorCategory.InvalidOperation, Target));
+                Session.Log.Error($"Could not approve {InputObject.FullName}", ex);
+                WriteError(new ErrorRecord(ex, "This item cannot be approved.", ErrorCategory.InvalidOperation, InputObject));
             }
         }
 
@@ -194,15 +209,15 @@ namespace RedditSharp.PowerShell.Cmdlets
         {
             try
             {
-                var t = Target as VotableThing;
+                var t = InputObject as VotableThing;
                 t.Distinguish(distinguishTypeContext.DistinguishType);
-                Session.Log.Debug($"Distinguished {Target.FullName} as {distinguishTypeContext.DistinguishType}");
-                WriteObject(Target);
+                Session.Log.Debug($"Distinguished {InputObject.FullName} as {distinguishTypeContext.DistinguishType}");
+                WriteObject(InputObject);
             }
             catch (NullReferenceException ex)
             {
-                Session.Log.Error($"Could not distinguish {Target.FullName}");
-                WriteError(new ErrorRecord(ex, "This item cannot be distinguished.", ErrorCategory.InvalidOperation, Target));
+                Session.Log.Error($"Could not distinguish {InputObject.FullName}");
+                WriteError(new ErrorRecord(ex, "This item cannot be distinguished.", ErrorCategory.InvalidOperation, InputObject));
             }
         }
 

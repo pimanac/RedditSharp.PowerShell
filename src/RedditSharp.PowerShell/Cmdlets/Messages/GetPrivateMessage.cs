@@ -9,6 +9,11 @@ using RedditSharp.Things;
 
 namespace RedditSharp.PowerShell.Cmdlets
 {
+    /// <summary>
+    /// <para type="synopsis">Get a list of private messages.  Also returns modmail.</para>
+    /// <para type="description">Get a list of private messsages and/or modmail with optional filtering.</para>
+    /// <para type="description">Get a list of private messsages and/or modmail with optional filtering.</para>
+    /// </summary>
     [Cmdlet(VerbsCommon.Get, "PrivateMessage")]
     [OutputType(typeof(PrivateMessage))]
     [OutputType(typeof(IEnumerable<PrivateMessage>))]
@@ -20,21 +25,36 @@ namespace RedditSharp.PowerShell.Cmdlets
         [ValidateNotNullOrEmpty]
         public Thing InputObject { get; set; }
 
+        /// <summary>
+        /// <para type="description">Return only unread messages.</para>
+        /// </summary>
         [Parameter(HelpMessage = "Return only unread messages.")]
         public SwitchParameter Unread { get; set; }
 
+        /// <summary>
+        /// <para type="description">Return modmail instead of Private Messages.</para>
+        /// </summary>
         [Parameter(Mandatory = false,
                    HelpMessage = "Filter subreddit modmail")]
         public SwitchParameter Modmail { get; set; }
 
+        /// <summary>
+        /// <para type="description">Filter by these users.</para>
+        /// </summary>
         [Parameter(Mandatory = false,
                    HelpMessage = "Return messages from users in this list.")]
         public string[] UserFilter { get; set; }
 
+        /// <summary>
+        /// <para type="description">Filter by these subreddits.</para>
+        /// </summary>
         [Parameter(Mandatory = false,
                    HelpMessage = "Return messages from subreddits in this list.")]
         public string[] SubredditFilter { get; set; }
 
+        /// <summary>
+        /// <para type="description">Maximum number of items to fetch from the listing.  Default: 1000</para>
+        /// </summary>
         [Parameter(Mandatory = false,
                    HelpMessage = "Maximum number of items to fetch from the listing.  Default: 1000")
         ]

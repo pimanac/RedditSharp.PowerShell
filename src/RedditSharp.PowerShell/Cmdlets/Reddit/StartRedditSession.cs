@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Management.Automation;
+using System.Net;
 
 
 namespace RedditSharp.PowerShell.Cmdlets
@@ -9,6 +10,9 @@ namespace RedditSharp.PowerShell.Cmdlets
     /// <para type="description">Start a reddit session using the specified credentials.</para>
     /// <para type="description">Only OAUTH clients are supported.  See https://github.com/reddit/reddit/wiki/OAuth2 for more info.</para>
     /// <param type="description">See https://www.reddit.com/prefs/apps/ to configure oauth for your account.</param>
+    /// <example>
+    ///    <code>Start-RedditSession -UserName</code>
+    /// </example>
     /// </summary>
     [Cmdlet(VerbsLifecycle.Start,"RedditSession")]
     [OutputType(typeof(RedditSharp.Reddit))]
@@ -78,6 +82,7 @@ namespace RedditSharp.PowerShell.Cmdlets
             Session.Reddit = null;
             Session.AuthenticatedUser = null;
         }
+        
 
         public StartRedditSession()
         {

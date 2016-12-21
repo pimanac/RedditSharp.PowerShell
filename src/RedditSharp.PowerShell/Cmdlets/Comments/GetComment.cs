@@ -9,13 +9,13 @@ namespace RedditSharp.PowerShell.Cmdlets
     public class GetComment : Cmdlet
     {
         [Parameter(
-            ParameterSetName = "ByUri",
+            ParameterSetName = "ByUrl",
             Mandatory = true,
             Position = 0,
-            HelpMessage = "Comment Uri"
+            HelpMessage = "Comment Url"
         )]
         [ValidateNotNullOrEmpty]
-        public string Uri { get; set; }
+        public string Url { get; set; }
 
         [Parameter(
             ParameterSetName = "ByName",
@@ -59,8 +59,8 @@ namespace RedditSharp.PowerShell.Cmdlets
 
             var r = Session.Reddit;
             Session.Log.Debug($"Getting Comment");
-            if (Uri != String.Empty)
-                WriteObject(GetRedditComment(new Uri(Uri)));
+            if (Url != String.Empty)
+                WriteObject(GetRedditComment(new Uri(Url)));
             else
                 WriteObject(GetRedditComment(Subreddit, PostId, CommentId));
         }
@@ -73,7 +73,7 @@ namespace RedditSharp.PowerShell.Cmdlets
             }
             catch (Exception ex)
             {
-                WriteError(new ErrorRecord(ex, "CantGetComment", ErrorCategory.InvalidOperation, Uri));
+                WriteError(new ErrorRecord(ex, "CantGetComment", ErrorCategory.InvalidOperation, Url));
                 throw;
             }
         }
@@ -86,7 +86,7 @@ namespace RedditSharp.PowerShell.Cmdlets
             }
             catch (Exception ex)
             {
-                WriteError(new ErrorRecord(ex, "CantGetComment", ErrorCategory.InvalidOperation, Uri));
+                WriteError(new ErrorRecord(ex, "CantGetComment", ErrorCategory.InvalidOperation, Url));
                 throw;
             }
         }

@@ -10,6 +10,15 @@ using RedditSharp.Things;
 
 namespace RedditSharp.PowerShell.Cmdlets.Posts
 {
+    /// <summary>
+    /// <para type="description">Create a new reddit post</para>
+    /// <example>
+    ///    <code>Get-Subreddit "example" | New-Post -Type Link -Title "Hello, world!" -Body "This is my new post"</code>
+    /// </example>
+    /// <example>
+    ///    <code>New-Post -Subreddit example -Type Link -Title "Hello, world!" -Body "This is my new post"</code>
+    /// </example>
+    /// </summary>
     [Cmdlet(VerbsCommon.New,"Post")]
     [OutputType(typeof(Post))]
     public class NewPost : PSCmdlet, IDynamicParameters
@@ -17,6 +26,9 @@ namespace RedditSharp.PowerShell.Cmdlets.Posts
         private SelfPostDynamicParameter selfPostContext;
         private LinkPostDynamicParameter linkPostContext;
 
+        /// <summary>
+        /// <para type="description">Subreddit in which to post.</para>
+        /// </summary>
         [Parameter(ParameterSetName = "ByInputObject",
                    Mandatory = true,
                    Position = 0,
@@ -25,6 +37,9 @@ namespace RedditSharp.PowerShell.Cmdlets.Posts
         [ValidateNotNullOrEmpty]
         public Subreddit InputObject { get; set; }
 
+        /// <summary>
+        /// <para type="description">Subreddit in which to post.</para>
+        /// </summary>
         [Parameter(ParameterSetName = "ByName",
                    Mandatory = true,
                    Position = 0,
@@ -32,12 +47,19 @@ namespace RedditSharp.PowerShell.Cmdlets.Posts
         [ValidateNotNullOrEmpty]
         public string Subreddit { get; set; }
 
+        /// <summary>
+        /// <para type="synopsis">Link or self post.</para>
+        /// <para type="description">Type of post to submit.  Link or self.</para>
+        /// </summary>
         [Parameter(Mandatory = true,
                    Position = 1,
                    HelpMessage = "Type of post (link or self)")]
         [ValidateSet(new []{"Link","Self"})]
         public string Type { get; set; }
 
+        /// <summary>
+        /// <para type="description">Title of the post.</para>
+        /// </summary>
         [Parameter(Mandatory = true,
            Position = 1,
            HelpMessage = "Post title.)")]
@@ -109,12 +131,18 @@ namespace RedditSharp.PowerShell.Cmdlets.Posts
 
     public class SelfPostDynamicParameter
     {
+        /// <summary>
+        /// <para type="description">Body of the self post.  Markdown is supported.</para>
+        /// </summary>
         [Parameter(Mandatory=true,Position = 2,HelpMessage = "Self post body text/markdown.")]
         public string Body { get; set; }
     }
 
     public class LinkPostDynamicParameter
     {
+        /// <summary>
+        /// <para type="description">Url to link.</para>
+        /// </summary>
         [Parameter(Mandatory = true, Position = 2, HelpMessage = "Url to link.")]
         public string Url { get; set; }
     }

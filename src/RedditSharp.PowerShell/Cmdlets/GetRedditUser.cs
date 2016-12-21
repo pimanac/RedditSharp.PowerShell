@@ -8,10 +8,19 @@ using RedditSharp.Things;
 
 namespace RedditSharp.PowerShell.Cmdlets
 {
+    /// <summary>
+    /// <para type="description">Return a RedditUser by name.</para>
+    /// <example>
+    ///    <code>Get-RedditUser -Name example</code>
+    /// </example>
+    /// </summary>
     [Cmdlet(VerbsCommon.Get, "RedditUser")]
     [OutputType(typeof(RedditUser))]
     public class GetRedditUser : Cmdlet
     {
+        /// <summary>
+        /// Reddit username.
+        /// </summary>
         [Parameter(Mandatory = true, Position = 0, HelpMessage = "Reddit username")]
         [ValidateNotNullOrEmpty]
         public string Name { get; set; }

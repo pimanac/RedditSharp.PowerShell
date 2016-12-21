@@ -13,19 +13,15 @@ namespace RedditSharp.PowerShell.Cmdlets
     /// <para type="description">By default limit to 1000 records.  Set -Limit to -1 for unlimited.</para>
     /// <para type="description">Optionally filter [server side] by moderator name and/or action type.</para>
     /// <example>
-    ///    <para>Get the unfiltered modlog</para>
     ///    <code>Get-ModerationLog -Subreddit example</code>
     /// </example>
     /// <example>
-    ///    <para>Get a filtered modlog by moderators</para>
     ///    <code>Get-Subreddit "example" | Get-ModerationLog -Moderators @('foo','bar')</code>
     /// </example>
     /// <example>
-    ///    <para>Get a filtered modlog by action</para>
     ///    <code>Get-Modlog -Subreddit "example" -Action RemoveComment</code>
     /// </example>
     /// <example>
-    ///    <para>Get a filtered modlog</para>
     ///    <code>Get-Modlog -Subreddit "example" -Action ApproveComment -Mods @('foo') | % { Send-PrivateMessage -To $_.TargetAuthorName -Subject 'Hi' -Body 'foo approved your comment!' } </code>
     /// </example>
     /// </summary>
