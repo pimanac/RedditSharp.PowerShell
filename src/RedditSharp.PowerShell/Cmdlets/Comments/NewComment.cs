@@ -75,7 +75,7 @@ namespace RedditSharp.PowerShell.Cmdlets.Comments
             {
                 var p = target as Post;
                 var c =p.Comment(Body);
-                
+                WriteObject(c);
             }
             catch (Exception ex)
             {
