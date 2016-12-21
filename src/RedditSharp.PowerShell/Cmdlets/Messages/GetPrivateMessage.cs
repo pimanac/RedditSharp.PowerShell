@@ -11,6 +11,7 @@ namespace RedditSharp.PowerShell.Cmdlets
 {
     [Cmdlet(VerbsCommon.Get, "PrivateMessage")]
     [OutputType(typeof(PrivateMessage))]
+    [OutputType(typeof(IEnumerable<PrivateMessage>))]
     public class GetPrivateMessage : PSCmdlet
     {
         [Parameter(ParameterSetName = "ByInputObject",
