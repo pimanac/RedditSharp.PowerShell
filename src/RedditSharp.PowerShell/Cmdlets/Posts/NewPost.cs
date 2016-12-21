@@ -17,13 +17,13 @@ namespace RedditSharp.PowerShell.Cmdlets.Posts
         private SelfPostDynamicParameter selfPostContext;
         private LinkPostDynamicParameter linkPostContext;
 
-        [Parameter(ParameterSetName = "ByTarget",
+        [Parameter(ParameterSetName = "ByInputObject",
                    Mandatory = true,
                    Position = 0,
                    ValueFromPipeline = true,
                    HelpMessage = "Subreddit in which to post.")]
         [ValidateNotNullOrEmpty]
-        public Subreddit Target { get; set; }
+        public Subreddit InputObject { get; set; }
 
         [Parameter(ParameterSetName = "ByName",
                    Mandatory = true,
@@ -53,8 +53,8 @@ namespace RedditSharp.PowerShell.Cmdlets.Posts
 
         protected override void ProcessRecord()
         {
-            if (ParameterSetName == "ByTarget")
-                NewRedditPost(Target);
+            if (ParameterSetName == "ByInputObject")
+                NewRedditPost(InputObject);
             else
                 NewRedditPost(GetSubreddit());
         }
@@ -75,7 +75,7 @@ namespace RedditSharp.PowerShell.Cmdlets.Posts
             }
             catch (Exception ex)
             {
-                WriteError(new ErrorRecord(ex, "CantSubmitPost", ErrorCategory.InvalidOperation, Target));
+                WriteError(new ErrorRecord(ex, "CantSubmitPost", ErrorCategory.InvalidOperation, InputObject));
             }
         }
 

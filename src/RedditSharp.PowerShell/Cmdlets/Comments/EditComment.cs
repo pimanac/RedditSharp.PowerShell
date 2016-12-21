@@ -8,10 +8,10 @@ namespace RedditSharp.PowerShell.Cmdlets.Comments
     [OutputType(typeof(Comment))]
     public class EditComment : Cmdlet
     {
-        [Parameter(ParameterSetName = "ByTarget", Mandatory = true, Position = 0, ValueFromPipeline = true,
+        [Parameter(ParameterSetName = "ByInputObject", Mandatory = true, Position = 0, ValueFromPipeline = true,
              HelpMessage = "Comment to edit")]
         [ValidateNotNullOrEmpty]
-        public Comment Target { get; set; }
+        public Comment InputObject { get; set; }
 
         [Parameter(Mandatory = true, HelpMessage = "Comment text/markdown")]
         [ValidateNotNullOrEmpty]
@@ -28,16 +28,16 @@ namespace RedditSharp.PowerShell.Cmdlets.Comments
         {
             try
             {
-                Target.EditText(Body);
-                Target.Body = Body;
-                Session.Log.Debug($"Edited {Target.FullName}");
-                WriteObject(Target);
+                InputObject.EditText(Body);
+                InputObject.Body = Body;
+                Session.Log.Debug($"Edited {InputObject.FullName}");
+                WriteObject(InputObject);
             }
             catch (Exception ex)
             {
-                Session.Log.Error($"Could not edit {Target.FullName}");
+                Session.Log.Error($"Could not edit {InputObject.FullName}");
                 WriteError(new ErrorRecord(ex, "CantEditComment",
-                    ErrorCategory.InvalidOperation, Target));
+                    ErrorCategory.InvalidOperation, InputObject));
             }
         }
     }

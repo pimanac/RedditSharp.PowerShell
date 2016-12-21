@@ -13,11 +13,11 @@ namespace RedditSharp.PowerShell.Cmdlets
     [OutputType(typeof(PrivateMessage))]
     public class GetPrivateMessage : PSCmdlet
     {
-        [Parameter(ParameterSetName = "ByTarget",
+        [Parameter(ParameterSetName = "ByInputObject",
                    HelpMessage = "Target object",
                    ValueFromPipeline = true)]
         [ValidateNotNullOrEmpty]
-        public Thing Target { get; set; }
+        public Thing InputObject { get; set; }
 
         [Parameter(HelpMessage = "Return only unread messages.")]
         public SwitchParameter Unread { get; set; }

@@ -37,12 +37,12 @@ namespace RedditSharp.PowerShell.Cmdlets
         /// <summary>
         /// <para type="description">Get the Moderation log for this subreddit.</para>
         /// </summary>
-        [Parameter(ParameterSetName = "ByTarget",
+        [Parameter(ParameterSetName = "ByInputObject",
              Mandatory = false,
              ValueFromPipeline = true,
              HelpMessage = "Target Subreddit.")]
         [ValidateNotNullOrEmpty]
-        public Subreddit Target { get; set; }
+        public Subreddit InputObject { get; set; }
 
         /// <summary>
         /// <para type="description">Get the Moderation for this subreddit.</para>
@@ -119,7 +119,7 @@ namespace RedditSharp.PowerShell.Cmdlets
             else
             {
                 job = new GetModerationLogJob();
-                job.Subreddit = Target;
+                job.Subreddit = InputObject;
                 job.Action = Action;
                 job.Moderators = Moderators;
                 job.Limit = Limit;
@@ -128,13 +128,12 @@ namespace RedditSharp.PowerShell.Cmdlets
                 WriteObject(job);
                 ThreadPool.QueueUserWorkItem(o => job.ProcessJob());
             }
-
         }
 
         private IEnumerable<ModAction> DoWork()
         {
             if (ParameterSetName == "ByName")
-                Target = GetSubreddit();
+                InputObject = GetSubreddit();
 
             if (Action != null && Moderators != null && Moderators.Length > 0)
                 return GetModLog(Action.Value, Moderators);
@@ -156,7 +155,7 @@ namespace RedditSharp.PowerShell.Cmdlets
         {
             try
             {
-                return Target.GetModerationLog().GetListing(Limit, 100);
+                return InputObject.GetModerationLog().GetListing(Limit, 100);
             }
             catch (Exception ex)
             {
@@ -169,7 +168,7 @@ namespace RedditSharp.PowerShell.Cmdlets
         {
             try
             {
-                return Target.GetModerationLog(action).GetListing(Limit, 100);
+                return InputObject.GetModerationLog(action).GetListing(Limit, 100);
             }
             catch (Exception ex)
             {
@@ -182,7 +181,7 @@ namespace RedditSharp.PowerShell.Cmdlets
         {
             try
             {
-                return Target.GetModerationLog(moderators).GetListing(Limit, 100);
+                return InputObject.GetModerationLog(moderators).GetListing(Limit, 100);
             }
             catch (Exception ex)
             {
@@ -195,7 +194,7 @@ namespace RedditSharp.PowerShell.Cmdlets
         {
             try
             {
-                return Target.GetModerationLog(action, moderators).GetListing(Limit, 100);
+                return InputObject.GetModerationLog(action, moderators).GetListing(Limit, 100);
             }
             catch (Exception ex)
             {

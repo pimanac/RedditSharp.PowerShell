@@ -11,11 +11,11 @@ namespace RedditSharp.PowerShell.Cmdlets
     [OutputType(typeof(bool))]
     public class NewPrivateMessage : PSCmdlet
     {
-        [Parameter(ParameterSetName = "ByTarget",
+        [Parameter(ParameterSetName = "ByInputObject",
             Position = 0,
             ValueFromPipeline = true,
             HelpMessage = "Reddit User to which to send the message.")]
-        public RedditUser Target { get; set; }
+        public RedditUser InputObject { get; set; }
 
         [Parameter(ParameterSetName = "ByUserName", Position = 0, HelpMessage = "Reddit username to which to send the message.")]
         public string To { get; set; }
@@ -39,8 +39,8 @@ namespace RedditSharp.PowerShell.Cmdlets
 
         protected override void ProcessRecord()
         {
-            if (ParameterSetName == "ByTarget")
-                SendMessage(Target.Name);
+            if (ParameterSetName == "ByInputObject")
+                SendMessage(InputObject.Name);
             else
                 SendMessage(To);
         }

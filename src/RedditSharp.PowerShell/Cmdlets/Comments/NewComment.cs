@@ -15,10 +15,10 @@ namespace RedditSharp.PowerShell.Cmdlets.Comments
     [OutputType(typeof(Comment))]
     public class NewComment : PSCmdlet
     {
-        [Parameter(ParameterSetName = "ByTarget",Mandatory = true, Position = 0, ValueFromPipeline = true,
+        [Parameter(ParameterSetName = "ByInputObject",Mandatory = true, Position = 0, ValueFromPipeline = true,
              HelpMessage = "Post or Comment to reply to.")]
         [ValidateNotNullOrEmpty]
-        public VotableThing Target { get; set; }
+        public VotableThing InputObject { get; set; }
 
         [Parameter(ParameterSetName = "ByType",Mandatory = true,Position = 0,HelpMessage = "Replying to a Comment or a Post")]
         [ValidateSet(new []{"Comment","Post"})]
@@ -47,7 +47,7 @@ namespace RedditSharp.PowerShell.Cmdlets.Comments
                     Id = Id.Remove(0, 3);
             }
 
-            if (Target == null)
+            if (InputObject == null)
             {
                 switch (TargetType)
                 {
@@ -61,10 +61,10 @@ namespace RedditSharp.PowerShell.Cmdlets.Comments
             }
             else
             {
-                if (Target is Comment)
-                    CommentComment(Target);
+                if (InputObject is Comment)
+                    CommentComment(InputObject);
                 else
-                    CommentPost(Target);
+                    CommentPost(InputObject);
             }
         }
 
@@ -79,7 +79,7 @@ namespace RedditSharp.PowerShell.Cmdlets.Comments
             }
             catch (Exception ex)
             {
-                WriteError(new ErrorRecord(ex, "CannotReplyToPost", ErrorCategory.InvalidOperation, Target));
+                WriteError(new ErrorRecord(ex, "CannotReplyToPost", ErrorCategory.InvalidOperation, InputObject));
             }
         }
 
@@ -96,7 +96,7 @@ namespace RedditSharp.PowerShell.Cmdlets.Comments
             }
             catch (Exception ex)
             {
-                WriteError(new ErrorRecord(ex, "CannotReplyToPost", ErrorCategory.InvalidOperation, Target));
+                WriteError(new ErrorRecord(ex, "CannotReplyToPost", ErrorCategory.InvalidOperation, InputObject));
             }
         }
 
@@ -110,7 +110,7 @@ namespace RedditSharp.PowerShell.Cmdlets.Comments
             }
             catch (Exception ex)
             {
-                WriteError(new ErrorRecord(ex, "CannotReplyToComment", ErrorCategory.InvalidOperation, Target));
+                WriteError(new ErrorRecord(ex, "CannotReplyToComment", ErrorCategory.InvalidOperation, InputObject));
             }
         }
 
@@ -129,7 +129,7 @@ namespace RedditSharp.PowerShell.Cmdlets.Comments
             }
             catch (Exception ex)
             {
-                WriteError(new ErrorRecord(ex, "CannotReplyToComment", ErrorCategory.InvalidOperation, Target));
+                WriteError(new ErrorRecord(ex, "CannotReplyToComment", ErrorCategory.InvalidOperation, InputObject));
             }
         }
     }
