@@ -50,6 +50,7 @@ namespace RedditSharp.PowerShell.Cmdlets
                 Session.Reddit = new RedditSharp.Reddit(Session.WebAgent, true);
                 Session.AuthenticatedUser = Session.Reddit.User;
                 Session.Start();
+                WriteObject(Session.Reddit);
             }
             catch (Exception ex)
             {
