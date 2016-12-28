@@ -1,5 +1,4 @@
 ﻿using System.Management.Automation;
-using log4net;
 
 namespace RedditSharp.PowerShell.Cmdlets
 {

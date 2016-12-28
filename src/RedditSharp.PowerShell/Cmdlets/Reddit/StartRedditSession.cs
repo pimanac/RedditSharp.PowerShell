@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Management.Automation;
-using System.Net;
 
 
 namespace RedditSharp.PowerShell.Cmdlets

@@ -1,12 +1,5 @@
 ﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Management.Automation;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 using RedditSharp.Things;
 
 namespace RedditSharp.PowerShell.Cmdlets.Comments

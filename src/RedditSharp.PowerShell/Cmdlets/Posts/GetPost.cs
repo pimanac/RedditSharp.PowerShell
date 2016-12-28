@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing;
-using System.Linq;
 using System.Management.Automation;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using RedditSharp.Things;
 
 namespace RedditSharp.PowerShell.Cmdlets

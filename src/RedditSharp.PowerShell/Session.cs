@@ -2,16 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
-using System.Management.Automation;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.PowerShell.Commands;
-using RedditSharp;
 using RedditSharp.Things;
-using System.Runtime.Caching;
 using log4net;
 using log4net.Appender;
 using log4net.Config;
