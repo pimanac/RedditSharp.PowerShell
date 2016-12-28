@@ -58,7 +58,7 @@ namespace RedditSharp.PowerShell.Cmdlets
                 Subreddit = Subreddit.Remove(0, 2);
 
             var r = Session.Reddit;
-            Session.Log.Debug($"Getting Comment");
+            WriteVerbose($"Getting Comment");
             if (Url != String.Empty)
                 WriteObject(GetRedditComment(new Uri(Url)));
             else

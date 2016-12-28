@@ -198,12 +198,12 @@ namespace RedditSharp.PowerShell.Cmdlets
             }
             catch (Exception ex)
             {
-                Session.Log.Error("Unable to get subreddit", ex);
-                throw ex;
+                WriteError(new ErrorRecord(ex, "cantgetsubreddit", ErrorCategory.InvalidOperation, InputObject));
+                throw;
             }
         }
-
     }
+
 
     internal class GetPostJob : Job
     {

@@ -39,12 +39,11 @@ namespace RedditSharp.PowerShell.Cmdlets.Comments
             {
                 InputObject.EditText(Body);
                 InputObject.Body = Body;
-                Session.Log.Debug($"Edited {InputObject.FullName}");
+                WriteVerbose($"Edited {InputObject.FullName}");
                 WriteObject(InputObject);
             }
             catch (Exception ex)
             {
-                Session.Log.Error($"Could not edit {InputObject.FullName}");
                 WriteError(new ErrorRecord(ex, "CantEditComment",
                     ErrorCategory.InvalidOperation, InputObject));
             }

@@ -5,8 +5,6 @@ $helpDir = "./RedditSharp/en-US"
 $files = gci @("RedditSharp.PowerShell.dll",
                "RedditSharp.dll",
                "Newtonsoft.Json.dll",
-               "HtmlAgilityPack.dll",
-               "log4net.dll",
                "RedditSharp.psd1",
                "RedditSharp.PowerShell.dll-Help.xml",
                "RedditSharp.PowerShell.format.ps1xml"

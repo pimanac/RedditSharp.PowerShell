@@ -108,7 +108,6 @@ namespace RedditSharp.PowerShell.Cmdlets
                 }
                 catch (Exception ex)
                 {
-                    Session.Log.Error("Unable to get modlog", ex);
                     WriteError(new ErrorRecord(ex, "CantGetModlog", ErrorCategory.InvalidOperation, null));
                 }
             }
@@ -143,7 +142,7 @@ namespace RedditSharp.PowerShell.Cmdlets
             if (Action == null && Moderators == null)
                 return GetModLog();
 
-            Session.Log.Error("Unable to get listing");
+            WriteWarning("Unable to get listing");
             return null;
         }
 
@@ -155,7 +154,7 @@ namespace RedditSharp.PowerShell.Cmdlets
             }
             catch (Exception ex)
             {
-                Session.Log.Error("Unable to get modlog", ex);
+                WriteError(new ErrorRecord(ex, "cantgetmodlog", ErrorCategory.InvalidOperation, InputObject));
                 throw ex;
             }
         }
@@ -168,7 +167,7 @@ namespace RedditSharp.PowerShell.Cmdlets
             }
             catch (Exception ex)
             {
-                Session.Log.Error("Unable to get modlog", ex);
+                WriteError(new ErrorRecord(ex, "cantgetmodlog", ErrorCategory.InvalidOperation, InputObject));
                 throw ex;
             }
         }
@@ -181,7 +180,7 @@ namespace RedditSharp.PowerShell.Cmdlets
             }
             catch (Exception ex)
             {
-                Session.Log.Error("Unable to get modlog", ex);
+                WriteError(new ErrorRecord(ex, "cantgetmodlog", ErrorCategory.InvalidOperation, InputObject));
                 throw ex;
             }
         }
@@ -194,7 +193,7 @@ namespace RedditSharp.PowerShell.Cmdlets
             }
             catch (Exception ex)
             {
-                Session.Log.Error("Unable to get modlog", ex);
+                WriteError(new ErrorRecord(ex, "cantgetmodlog", ErrorCategory.InvalidOperation, InputObject));
                 throw ex;
             }
         }
@@ -209,7 +208,7 @@ namespace RedditSharp.PowerShell.Cmdlets
             }
             catch (Exception ex)
             {
-                Session.Log.Error("Unable to get subreddit", ex);
+                WriteError(new ErrorRecord(ex, "cantgetmodlog", ErrorCategory.InvalidOperation, InputObject));
                 throw ex;
             }
         }
@@ -262,7 +261,7 @@ namespace RedditSharp.PowerShell.Cmdlets
             }
             catch (Exception ex)
             {
-                Session.Log.Error("Unable to get modlog", ex);
+                Error.Add(new ErrorRecord(ex, "cantgetmodlog", ErrorCategory.InvalidOperation, Subreddit));
                 throw ex;
             }
         }
@@ -275,7 +274,7 @@ namespace RedditSharp.PowerShell.Cmdlets
             }
             catch (Exception ex)
             {
-                Session.Log.Error("Unable to get modlog", ex);
+                Error.Add(new ErrorRecord(ex, "cantgetmodlog", ErrorCategory.InvalidOperation, Subreddit));
                 throw ex;
             }
         }
@@ -288,7 +287,7 @@ namespace RedditSharp.PowerShell.Cmdlets
             }
             catch (Exception ex)
             {
-                Session.Log.Error("Unable to get modlog", ex);
+                Error.Add(new ErrorRecord(ex, "cantgetmodlog", ErrorCategory.InvalidOperation, Subreddit));
                 throw ex;
             }
         }
@@ -301,8 +300,8 @@ namespace RedditSharp.PowerShell.Cmdlets
             }
             catch (Exception ex)
             {
-                Session.Log.Error("Unable to get modlog", ex);
-                throw ex;
+                Error.Add(new ErrorRecord(ex, "cantgetmodlog", ErrorCategory.InvalidOperation, Subreddit));
+                throw;
             }
         }
     }

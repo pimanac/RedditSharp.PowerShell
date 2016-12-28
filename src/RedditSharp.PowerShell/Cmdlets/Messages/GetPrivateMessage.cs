@@ -115,10 +115,10 @@ namespace RedditSharp.PowerShell.Cmdlets
         /// </summary>
         private void DoGetModmail()
         {
-            Session.Log.Debug("Getting Modmail");
+            WriteVerbose("Getting Modmail");
             if (Unread.IsPresent)
             {
-                Session.Log.Debug("Unread flag is set");
+                WriteDebug("Unread flag is set");
                 // Unread messages from inbox
                 WriteObject(Session.AuthenticatedUser.ModMail
                         .Where(x => MessageFilter(x, UserFilter, SubredditFilter))
@@ -148,7 +148,6 @@ namespace RedditSharp.PowerShell.Cmdlets
             bool result;
             if (userFilter == null && subFilter == null)
             {
-                Session.Log.Debug("No message filter");
                 return true;
             }
 
@@ -156,7 +155,6 @@ namespace RedditSharp.PowerShell.Cmdlets
             var theMessage = message as PrivateMessage;
             if (theMessage == null)
             {
-                Session.Log.Warn("Reddit returned something that wasn't a PrivateMessage");
                 return false;
             }
 
@@ -164,9 +162,6 @@ namespace RedditSharp.PowerShell.Cmdlets
             if ((userFilter != null && userFilter.Length > 0) && subFilter == null)
             {
                 result = Array.IndexOf(userFilter, theMessage.Author) > 0;
-
-                if (result)
-                    Session.Log.Debug("PrivateMessage matches userFilter : " + theMessage.Author);
 
                 return result;
             }
@@ -176,21 +171,14 @@ namespace RedditSharp.PowerShell.Cmdlets
             {
                 result = Array.IndexOf(subFilter, theMessage.Subreddit) > 0;
 
-                if (result)
-                    Session.Log.Debug("PrivateMessage matches subredditFilter : " + theMessage.Subreddit);
-
                 return result;
             }
 
             result = (Array.IndexOf(userFilter, theMessage.Author) > 0) &&
                          (Array.IndexOf(subFilter, theMessage.Subreddit) > 0);
 
-            if (result)
-                Session.Log.Debug("PrivateMessage matches userFilter : " + theMessage.Author + "  /  subredditFilter : " + theMessage.Subreddit);
-
             // filter on both subreddit and user
             return result;
         }
-
     }
 }

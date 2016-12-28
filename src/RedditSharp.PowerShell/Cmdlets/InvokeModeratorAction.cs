@@ -85,11 +85,10 @@ namespace RedditSharp.PowerShell.Cmdlets
                             banContext.Message);
                     else
                         sub.BanUser(banContext.User, banContext.Note);
-                    Session.Log.Info($"Banned user {banContext.User} in subreddit {banContext.Subreddit}");
+                    WriteVerbose($"Banned user {banContext.User} in subreddit {banContext.Subreddit}");
                 }
                 catch (Exception ex)
                 {
-                    Session.Log.Error("Could not ban user", ex);
                     WriteError(new ErrorRecord(ex, "CantInvokeModeAction", ErrorCategory.InvalidOperation, null));
                 }
             }
@@ -105,11 +104,10 @@ namespace RedditSharp.PowerShell.Cmdlets
                     sub = Session.Reddit.GetSubreddit(banContext.Subreddit);
 
                 sub.UnBanUser(unbanContext.User);
-                Session.Log.Info($"Unban user {banContext.User} in subreddit {banContext.Subreddit}");
+                WriteVerbose($"Unban user {banContext.User} in subreddit {banContext.Subreddit}");
             }
             catch (Exception ex)
             {
-                Session.Log.Error("Could not unban user", ex);
                 WriteError(new ErrorRecord(ex, "UnableToDoModAction", ErrorCategory.InvalidOperation, null));
             }
         }
@@ -118,7 +116,6 @@ namespace RedditSharp.PowerShell.Cmdlets
         {
             if (InputObject.Kind != "t3")
             {
-                Session.Log.Warn("Cannot flair this this");
                 WriteError(new ErrorRecord(
                             new InvalidOperationException("Cannot flair this Thing."),
                         "CannotFlair",
@@ -132,12 +129,11 @@ namespace RedditSharp.PowerShell.Cmdlets
                 {
                     var p = InputObject as Post;
                     p.SetFlair(text, cssClass);
-                    Session.Log.Debug($"Set flair on {p.FullName} to {text}  /  {cssClass}");
+                    WriteVerbose($"Set flair on {p.FullName} to {text}  /  {cssClass}");
                     WriteObject(InputObject);
                 }
                 catch (Exception ex)
                 {
-                    Session.Log.Error("Could not set flair");
                     WriteError(new ErrorRecord(ex, "CannotFlair", ErrorCategory.InvalidOperation, InputObject));
                 }
             }
@@ -160,12 +156,11 @@ namespace RedditSharp.PowerShell.Cmdlets
                     p = InputObject as Post;
                     p.Remove();
                 }
-                Session.Log.Debug($"Removed {InputObject.FullName}");
+                WriteVerbose($"Removed {InputObject.FullName}");
                 WriteObject(InputObject);
             }
             catch (Exception ex)
             {
-                Session.Log.Error($"Could not remove {InputObject.FullName}", ex);
                 WriteError(new ErrorRecord(ex, "This item cannot be removed.", ErrorCategory.InvalidOperation, InputObject));
             }
         }
@@ -187,12 +182,11 @@ namespace RedditSharp.PowerShell.Cmdlets
                     p = InputObject as Post;
                     p.Approve();
                 }
-                Session.Log.Debug($"Approved {InputObject.FullName}");
+                WriteVerbose($"Approved {InputObject.FullName}");
                 WriteObject(InputObject);
             }
             catch (Exception ex)
             {
-                Session.Log.Error($"Could not approve {InputObject.FullName}", ex);
                 WriteError(new ErrorRecord(ex, "This item cannot be approved.", ErrorCategory.InvalidOperation, InputObject));
             }
         }
@@ -203,12 +197,11 @@ namespace RedditSharp.PowerShell.Cmdlets
             {
                 var t = InputObject as VotableThing;
                 t.Distinguish(distinguishTypeContext.DistinguishType);
-                Session.Log.Debug($"Distinguished {InputObject.FullName} as {distinguishTypeContext.DistinguishType}");
+                WriteVerbose($"Distinguished {InputObject.FullName} as {distinguishTypeContext.DistinguishType}");
                 WriteObject(InputObject);
             }
             catch (NullReferenceException ex)
             {
-                Session.Log.Error($"Could not distinguish {InputObject.FullName}");
                 WriteError(new ErrorRecord(ex, "This item cannot be distinguished.", ErrorCategory.InvalidOperation, InputObject));
             }
         }

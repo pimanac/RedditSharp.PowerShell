@@ -66,7 +66,6 @@ namespace RedditSharp.PowerShell.Cmdlets
             if (Session.AuthenticatedUser != null)
             {
                 WriteObject("Connected to reddit.");
-                Session.Log.Info("Connected to reddit");
             }
             else
                 ThrowTerminatingError(new ErrorRecord(new Exception("Unknown reddit error - user is null"),

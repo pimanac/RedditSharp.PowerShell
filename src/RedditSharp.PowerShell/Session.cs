@@ -4,10 +4,6 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
 using RedditSharp.Things;
-using log4net;
-using log4net.Appender;
-using log4net.Config;
-using log4net.Layout;
 
 namespace RedditSharp.PowerShell
 {
@@ -43,8 +39,6 @@ namespace RedditSharp.PowerShell
         public static IWebAgent WebAgent;
         public static AuthenticatedUser AuthenticatedUser;
 
-        public static ILog Log;
-
         public static IDictionary<string, Thing> Cache;
 
 
@@ -54,8 +48,6 @@ namespace RedditSharp.PowerShell
             //  if (!done)
             //        RedirectAssembly("Newtonsoft.Json",new Version(9,0,0), "30ad4fe6b2a6aeed");
             Cache = new Dictionary<string, Thing>();
-            CreateLogger();
-            Log.Info("RedditSharp Powershell client (c) 2016");
         }
 
         public static T GetCacheItem<T>(string name) where T : Thing
@@ -67,21 +59,6 @@ namespace RedditSharp.PowerShell
         {
             Cache.Remove(key);
             Cache.Add(key, value);
-        }
-
-        private static void CreateLogger()
-        {
-            var layout = new PatternLayout("%date [%level] - %message%newline");
-            layout.ActivateOptions();
-
-            var appender = new ConsoleAppender
-            {
-                Target = "Console.Out",
-                Layout = layout
-            };
-            appender.ActivateOptions();
-            BasicConfigurator.Configure(appender);
-            Log = log4net.LogManager.GetLogger("RedditSharp");
         }
     }
 }
