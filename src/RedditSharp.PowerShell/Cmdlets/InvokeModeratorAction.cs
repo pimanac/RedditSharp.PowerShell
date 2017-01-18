@@ -14,6 +14,7 @@ namespace RedditSharp.PowerShell.Cmdlets
     /// </example>
     /// </summary>
     [Cmdlet(VerbsLifecycle.Invoke, "ModeratorAction")]
+    [OutputType(typeof(VotableThing))]
     public class InvokeModeratorAction : PSCmdlet, IDynamicParameters
     {
         private DistinguishTypeDynamicParameter distinguishTypeContext;
@@ -32,7 +33,7 @@ namespace RedditSharp.PowerShell.Cmdlets
         /// Item to action.  Must be a Comment, Post or User.
         /// </summary>
         [Parameter(Mandatory = false, Position = 1, ValueFromPipeline = true, HelpMessage = "Target RedditSharp.Thing")]
-        public Thing InputObject { get; set; }
+        public VotableThing InputObject { get; set; }
 
         protected override void BeginProcessing()
         {
