@@ -44,27 +44,27 @@ namespace RedditSharp.PowerShell.Cmdlets
 
         protected override void ProcessRecord()
         {
-            switch (Action)
+            switch (Action.ToLower())
             {
-                case "Approve":
+                case "approve":
                     Approve();
                     break;
-                case "Remove":
+                case "remove":
                     Remove();
                     break;
-                case "Ban":
+                case "ban":
                     Ban();
                     break;
-                case "Unban":
+                case "unban":
                     Unban();
                     break;
-                case "Flair":
+                case "flair":
                     Flair(flairContext.Text, flairContext.CssClass);
                     break;
-                case "Unflair":
+                case "unflair":
                     Flair("", "");
                     break;
-                case "Distinguish":
+                case "distinguish":
                     Distinguish();
                     break;
             }
