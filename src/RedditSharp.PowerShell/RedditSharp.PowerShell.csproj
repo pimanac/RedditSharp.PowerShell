@@ -63,6 +63,7 @@
     <Compile Include="Cmdlets\Reddit\StopRedditSession.cs" />
     <Compile Include="Cmdlets\Tools\GetModerationLog.cs" />
     <Compile Include="Cmdlets\Tools\GetModQueue.cs" />
+    <Compile Include="Cmdlets\Tools\GetUnmoderated.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="Cmdlets\Comments\GetComment.cs" />
