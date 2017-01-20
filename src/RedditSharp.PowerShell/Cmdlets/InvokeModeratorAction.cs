@@ -26,7 +26,7 @@ namespace RedditSharp.PowerShell.Cmdlets
         /// Action to perform on the item.
         /// </summary>
         [Parameter(Mandatory = true, Position = 0, HelpMessage = "Action to perform")]
-        [ValidateSet(new[] { "Approve", "Remove", "Ban", "Unban", "Flair", "Unflair", "Distinguish" }, IgnoreCase = true)]
+        [ValidateSet(new[] { "Approve", "Remove", "Ban", "Unban", "Flair", "Unflair", "Distinguish", "IgnoreReports", "UnIgnoreReports" }, IgnoreCase = true)]
         public string Action { get; set; }
 
         /// <summary>
@@ -66,6 +66,12 @@ namespace RedditSharp.PowerShell.Cmdlets
                     break;
                 case "distinguish":
                     Distinguish();
+                    break;
+                case "ignorereports":
+                    IgnoreReports();
+                    break;
+                case "unignorereports":
+                    UnIngoreReports();
                     break;
             }
         }
@@ -142,69 +148,37 @@ namespace RedditSharp.PowerShell.Cmdlets
 
         private void Remove()
         {
-            try
-            {
-                Comment c;
-                Post p;
-                c = InputObject as Comment;
-
-                if (c != null)
-                {
-                    c.Remove();
-                }
-                else
-                {
-                    p = InputObject as Post;
-                    p.Remove();
-                }
-                WriteVerbose($"Removed {InputObject.FullName}");
-                WriteObject(InputObject);
-            }
-            catch (Exception ex)
-            {
-                WriteError(new ErrorRecord(ex, "This item cannot be removed.", ErrorCategory.InvalidOperation, InputObject));
-            }
+            InputObject.Remove();
+            WriteVerbose($"Removed {InputObject.FullName}");
+            WriteObject(InputObject);
         }
 
         private void Approve()
         {
-            try
-            {
-                Comment c;
-                Post p;
-                c = InputObject as Comment;
-
-                if (c != null)
-                {
-                    c.Approve();
-                }
-                else
-                {
-                    p = InputObject as Post;
-                    p.Approve();
-                }
-                WriteVerbose($"Approved {InputObject.FullName}");
-                WriteObject(InputObject);
-            }
-            catch (Exception ex)
-            {
-                WriteError(new ErrorRecord(ex, "This item cannot be approved.", ErrorCategory.InvalidOperation, InputObject));
-            }
+            InputObject.Approve();
+            WriteVerbose($"Approved {InputObject.FullName}");
+            WriteObject(InputObject);
         }
 
         private void Distinguish()
         {
-            try
-            {
-                var t = InputObject as VotableThing;
-                t.Distinguish(distinguishTypeContext.DistinguishType);
-                WriteVerbose($"Distinguished {InputObject.FullName} as {distinguishTypeContext.DistinguishType}");
-                WriteObject(InputObject);
-            }
-            catch (NullReferenceException ex)
-            {
-                WriteError(new ErrorRecord(ex, "This item cannot be distinguished.", ErrorCategory.InvalidOperation, InputObject));
-            }
+            InputObject.Distinguish(distinguishTypeContext.DistinguishType);
+            WriteVerbose($"Distinguished {InputObject.FullName} as {distinguishTypeContext.DistinguishType}");
+            WriteObject(InputObject);
+        }
+
+        private void IgnoreReports()
+        {
+            InputObject.IgnoreReports();
+            WriteVerbose($"Ignore reports on {InputObject.FullName}");
+            WriteObject(InputObject);
+        }
+
+        private void UnIngoreReports()
+        {
+            InputObject.UnIgnoreReports();
+            WriteVerbose($"UnIgnore reports on {InputObject.FullName}");
+            WriteObject(InputObject);
         }
 
         // IDynamicParameters
