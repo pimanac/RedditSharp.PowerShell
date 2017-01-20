@@ -26,23 +26,23 @@ namespace RedditSharp.PowerShell.Cmdlets
         /// <summary>
         /// <para type="description">Reddit password.</para>
         /// </summary>
-        [Parameter(Mandatory = true, Position = 0, HelpMessage = "Reddit password")]
+        [Parameter(Mandatory = true, Position = 1, HelpMessage = "Reddit password")]
         public string Password { get; set; }
 
         /// <summary>
         /// <para type="description">Reddit Client Id.</para>
         /// </summary>
-        [Parameter(Mandatory = true, Position = 0, HelpMessage = "Reddit app key id")]
+        [Parameter(Mandatory = true, Position = 2, HelpMessage = "Reddit app key id")]
         public string ClientId { get; set; }
 
         /// <summary>
         /// <para type="description">Reddit Client Secret.</para>
         /// <param type="description">See https://www.reddit.com/prefs/apps/ for more info.</param>
         /// </summary>
-        [Parameter(Mandatory = true, Position = 0, HelpMessage = "Reddit app secret")]
+        [Parameter(Mandatory = true, Position = 3, HelpMessage = "Reddit app secret")]
         public string Secret { get; set; }
 
-        [Parameter(Mandatory = false, Position = 0, HelpMessage = "Redirect URL")]
+        [Parameter(Mandatory = false, Position = 4, HelpMessage = "Redirect URL")]
         public string RedirectUrl { get; set; }
 
         protected override void BeginProcessing()
