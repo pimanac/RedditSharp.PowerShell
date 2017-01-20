@@ -42,7 +42,7 @@ namespace RedditSharp.PowerShell.Cmdlets
         [Parameter(Mandatory = true, Position = 0, HelpMessage = "Reddit app secret")]
         public string Secret { get; set; }
 
-        [Parameter(Mandatory = true, Position = 0, HelpMessage = "Redirect URL")]
+        [Parameter(Mandatory = false, Position = 0, HelpMessage = "Redirect URL")]
         public string RedirectUrl { get; set; }
 
         protected override void BeginProcessing()
