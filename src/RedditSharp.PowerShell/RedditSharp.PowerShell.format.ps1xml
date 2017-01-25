@@ -95,6 +95,7 @@
                     </TableColumnHeader>
                     <TableColumnHeader>
                         <Label>CreatedUTC</Label>
+                       <Width>22</Width>
                     </TableColumnHeader>
                     <TableColumnHeader>
                         <Label>Author</Label>
