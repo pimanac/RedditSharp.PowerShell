@@ -13,7 +13,10 @@ namespace RedditSharp.PowerShell.Cmdlets
     ///    <code>Get-Subreddit "example" |  Get-Post -Sort Hot -Limit 10 | % { $_ | Invoke-Moderator-Action Approve }</code>
     /// </example>
     /// </summary>
-    [Cmdlet(VerbsLifecycle.Invoke, "ModeratorAction")]
+    [Cmdlet(VerbsLifecycle.Invoke, "ModeratorAction",
+        ConfirmImpact = ConfirmImpact.Medium,
+        SupportsShouldProcess = true
+    )]
     [OutputType(typeof(VotableThing))]
     public class InvokeModeratorAction : PSCmdlet, IDynamicParameters
     {
@@ -80,6 +83,9 @@ namespace RedditSharp.PowerShell.Cmdlets
         {
             if (banContext != null)
             {
+                if (!ShouldProcess(banContext.User, "Ban user"))
+                    return;
+
                 Subreddit sub;
                 try
                 {
@@ -148,6 +154,9 @@ namespace RedditSharp.PowerShell.Cmdlets
 
         private void Remove()
         {
+            if (!ShouldProcess(InputObject.FullName, "Remove Item"))
+                return;
+
             InputObject.Remove();
             WriteVerbose($"Removed {InputObject.FullName}");
             WriteObject(InputObject);
@@ -169,6 +178,9 @@ namespace RedditSharp.PowerShell.Cmdlets
 
         private void IgnoreReports()
         {
+            if (!ShouldProcess(InputObject.FullName, "Ignore Reports"))
+                return;
+
             InputObject.IgnoreReports();
             WriteVerbose($"Ignore reports on {InputObject.FullName}");
             WriteObject(InputObject);
@@ -191,7 +203,7 @@ namespace RedditSharp.PowerShell.Cmdlets
                     return distinguishTypeContext;
                 case "ban":
                     banContext = new BanDynamicParameter();
-                    break;
+                    return banContext;
                 case "unban":
                     unbanContext = new UnbanDynamicParameter();
                     return unbanContext;
